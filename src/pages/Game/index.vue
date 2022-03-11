@@ -66,7 +66,7 @@
   import { session, initSession } from '@/utils/storage';
   import { Modal } from 'ant-design-vue/es';
   import 'ant-design-vue/es/modal/style';
-  import wordsList from '@/utils/words.js';
+  import { wordsList } from '@/utils/words';
   interface InterfacePlayer {
     num: number;
     text: string;
