@@ -22,7 +22,7 @@
               </div>
               <div class="back">
                 <div class="number">{{ key + 1 }}</div>
-                <div class="word">sdfdsf</div>
+                <div class="word">{{ word.text }}</div>
                 <div class="confirm">
                   <a-button class="btn" type="primary" @click.stop="rememberClick"
                     >我记住啦</a-button
@@ -66,7 +66,7 @@
   import { session, initSession } from '@/utils/storage';
   import { Modal } from 'ant-design-vue/es';
   import 'ant-design-vue/es/modal/style';
-  console.log(session.value);
+  import wordsList from '@/utils/words.js';
   interface InterfacePlayer {
     num: number;
     text: string;
@@ -82,12 +82,25 @@
     spy = 2,
     white = 3
   }
+  // 取缓存词组
+  let civilianWord = session.value.civilianWord || '';
+  let spyWord = session.value.spyWord || '';
+  // 生成随机组词并放入缓存
+  if (!civilianWord || !spyWord) {
+    const wordsListNum = wordsList.length;
+    const selectWordKey = Math.floor(Math.random() * wordsListNum);
+    const selectWord = wordsList[selectWordKey];
+    [civilianWord, spyWord] = selectWord.split(',');
+    session.value.civilianWord = civilianWord;
+    session.value.spyWord = spyWord;
+  }
+
   const router = useRouter();
   const playerNums = session.value.player;
   const list = new Array(playerNums).fill(1).map((el, i) => {
     return {
       num: ++i,
-      text: 'sdfsdf',
+      text: civilianWord,
       status: 0,
       identity: EnumIdentity.civilian
     };
@@ -119,9 +132,11 @@
   // 设置
   spyKeys.forEach(key => {
     list[key].identity = EnumIdentity.spy;
+    list[key].text = spyWord;
   });
   whiteKeys.forEach(key => {
     list[key].identity = EnumIdentity.white;
+    list[key].text = '';
   });
   const readWords = reactive(list.map(el => ({ ...el })));
   const players = reactive(list.map(el => ({ ...el })));

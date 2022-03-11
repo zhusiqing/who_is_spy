@@ -7,6 +7,8 @@ interface InterfaceInitSession {
   selectKey?: number;
   spyKeys?: number[];
   whiteKeys?: number[];
+  civilianWord?: string;
+  spyWord?: string;
 }
 export const initSession: InterfaceInitSession = {
   player: 0,
