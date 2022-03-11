@@ -96,7 +96,11 @@
   }
 
   const router = useRouter();
-  const playerNums = session.value.player;
+  let playerNums = session.value.player;
+  if (!playerNums) {
+    playerNums = 4;
+    router.replace('/login');
+  }
   const list = new Array(playerNums).fill(1).map((el, i) => {
     return {
       num: ++i,
@@ -310,6 +314,7 @@
             height: 100%;
             transition: transform 1s ease;
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             background-color: @yellow;
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
           }
