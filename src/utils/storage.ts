@@ -1,5 +1,5 @@
 import { SESSION_KEY } from './constant';
-interface InterfaceInitSession {
+export interface InterfaceInitSession {
   player: number;
   spy: number;
   white: number;

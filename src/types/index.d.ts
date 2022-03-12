@@ -4,3 +4,9 @@ declare interface InterFaceUserInfo {
   job: string;
   auth: string[];
 }
+declare interface InterfacePlayer {
+  num: number;
+  text: string;
+  status: number;
+  identity: number;
+}

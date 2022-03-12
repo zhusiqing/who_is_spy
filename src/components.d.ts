@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button'];
     ASpin: typeof import('ant-design-vue/es')['Spin'];
+    Card: typeof import('./components/Card/index.vue')['default'];
     InitLoading: typeof import('./components/InitLoading/index.vue')['default'];
     MinusOutlined: typeof import('@ant-design/icons-vue')['MinusOutlined'];
     PlusOutlined: typeof import('@ant-design/icons-vue')['PlusOutlined'];
